@@ -20,6 +20,7 @@
  * Create a new Silex Application with Twig.  Configure it for debugging.
  * Follows Silex Skeleton pattern.
  */
+use Google\Auth\Credentials\AppIdentityCredentials;
 use Google\Cloud\Logger\AppEngineFlexHandler;
 // [START pubsub_client]
 use Google\Cloud\PubSub\PubSubClient;
@@ -188,6 +189,9 @@ $app['bookshelf.model'] = function ($app) {
                 $config['google_project_id']
             );
         case 'cloudsql':
+            // Add Unix Socket for CloudSQL 2nd Gen when applicable
+            $socket = AppIdentityCredentials::onAppEngine() ?
+                ';unix_socket=' . $config['cloudsql_connection_name'] : '';
             return new CloudSql(
                 $config['mysql_dsn'],
                 $config['mysql_user'],

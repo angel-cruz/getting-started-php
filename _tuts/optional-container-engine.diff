@@ -53,10 +53,10 @@ index 1bd64f0..bfb95a5 100644
  
 diff --git a/app.yaml b/app.yaml
 deleted file mode 100644
-index 50261f7..0000000
+index 32d992d..0000000
 --- a/app.yaml
 +++ /dev/null
-@@ -1,11 +0,0 @@
+@@ -1,15 +0,0 @@
 -runtime: php
 -vm: true
 -
@@ -68,6 +68,10 @@ index 50261f7..0000000
 -  NGINX_CONF_INCLUDE: config/nginx-app.conf
 -  PHP_INI_OVERRIDE: config/php-app.ini
 -# [END overrides]
+-
+-## Uncomment for Cloud SQL
+-# beta_settings:
+-#   cloud_sql_instances: "<INSTANCE_CONNECTION_NAME>"
 diff --git a/bookshelf-frontend.yaml b/bookshelf-frontend.yaml
 new file mode 100644
 index 0000000..041b17c

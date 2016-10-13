@@ -14,6 +14,18 @@ index 5a6b401..c23b619 100644
 -[step-1]: https://cloud.google.com/php/getting-started/hello-world
 +[step-2]: https://cloud.google.com/php/getting-started/using-structured-data
  
+diff --git a/app.yaml b/app.yaml
+index a53b035..737fecd 100644
+--- a/app.yaml
++++ b/app.yaml
+@@ -3,3 +3,7 @@ vm: true
+ 
+ runtime_config:
+   document_root: web
++
++## Uncomment for Cloud SQL
++# beta_settings:
++#   cloud_sql_instances: "<INSTANCE_CONNECTION_NAME>"
 diff --git a/composer.json b/composer.json
 index 088f870..bf24a5a 100644
 --- a/composer.json
@@ -1879,10 +1891,10 @@ index ef28057..c175343 100644
      "aliases": [],
 diff --git a/config/settings.yml.dist b/config/settings.yml.dist
 new file mode 100644
-index 0000000..4763bc6
+index 0000000..a295245
 --- /dev/null
 +++ b/config/settings.yml.dist
-@@ -0,0 +1,17 @@
+@@ -0,0 +1,18 @@
 +# Google credentials and configuration
 +google_client_id:      YOUR_CLIENT_ID
 +google_client_secret:  YOUR_CLIENT_SECRET
@@ -1895,6 +1907,7 @@ index 0000000..4763bc6
 +mysql_dsn: "mysql:host=IP_ADDRESS;port=3306;dbname=YOUR_DB_NAME"
 +mysql_user: YOUR_MYSQL_USER
 +mysql_password: YOUR_MYSQL_PASSWORD
++cloudsql_connection_name: "<INSTANCE_CONNECTION_NAME>"
 +
 +# configure Mongo backend
 +mongo_url: YOUR_MONGODB_URL
@@ -2666,10 +2679,10 @@ index 0000000..a30f12c
 +}
 diff --git a/src/app.php b/src/app.php
 new file mode 100644
-index 0000000..43e478d
+index 0000000..982a37f
 --- /dev/null
 +++ b/src/app.php
-@@ -0,0 +1,91 @@
+@@ -0,0 +1,95 @@
 +<?php
 +
 +/*
@@ -2692,6 +2705,7 @@ index 0000000..43e478d
 + * Create a new Silex Application with Twig.  Configure it for debugging.
 + * Follows Silex Skeleton pattern.
 + */
++use Google\Auth\Credentials\AppIdentityCredentials;
 +use Google\Cloud\Samples\Bookshelf\DataModel\CloudSql;
 +use Google\Cloud\Samples\Bookshelf\DataModel\Datastore;
 +use Google\Cloud\Samples\Bookshelf\DataModel\MongoDb;
@@ -2736,6 +2750,9 @@ index 0000000..43e478d
 +                $config['google_project_id']
 +            );
 +        case 'cloudsql':
++            // Add Unix Socket for CloudSQL 2nd Gen when applicable
++            $socket = AppIdentityCredentials::onAppEngine() ?
++                ';unix_socket=' . $config['cloudsql_connection_name'] : '';
 +            return new CloudSql(
 +                $config['mysql_dsn'],
 +                $config['mysql_user'],

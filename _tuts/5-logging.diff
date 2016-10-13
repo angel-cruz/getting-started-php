@@ -203,18 +203,18 @@ index c175343..9dd0353 100644
              "version": "v1.3.5",
              "source": {
 diff --git a/src/app.php b/src/app.php
-index b014e6f..d34b5ed 100644
+index be85386..cf5c6c5 100644
 --- a/src/app.php
 +++ b/src/app.php
-@@ -20,6 +20,7 @@
-  * Create a new Silex Application with Twig.  Configure it for debugging.
+@@ -21,6 +21,7 @@
   * Follows Silex Skeleton pattern.
   */
+ use Google\Auth\Credentials\AppIdentityCredentials;
 +use Google\Cloud\Logger\AppEngineFlexHandler;
  use Google\Cloud\Samples\Bookshelf\DataModel\CloudSql;
  use Google\Cloud\Samples\Bookshelf\DataModel\Datastore;
  use Google\Cloud\Samples\Bookshelf\DataModel\MongoDb;
-@@ -62,17 +63,29 @@ $app['user'] = function ($app) {
+@@ -63,17 +64,29 @@ $app['user'] = function ($app) {
  };
  // [END session]
  
