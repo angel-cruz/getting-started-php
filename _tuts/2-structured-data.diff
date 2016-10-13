@@ -5230,7 +5230,7 @@ index 0000000..7882a18
 +    }
 +}
 diff --git a/test/lib/GetConfigTrait.php b/test/lib/GetConfigTrait.php
-index 52c8550..c6d4c8f 100644
+index 52c8550..0ada004 100644
 --- a/test/lib/GetConfigTrait.php
 +++ b/test/lib/GetConfigTrait.php
 @@ -17,6 +17,8 @@
@@ -5242,7 +5242,7 @@ index 52c8550..c6d4c8f 100644
  /**
   * Class GetConfigTrait
   * @package Google\Cloud\Samples\Bookshelf
-@@ -27,11 +29,12 @@ trait GetConfigTrait
+@@ -27,19 +29,27 @@ trait GetConfigTrait
  {
      protected static function getConfig()
      {
@@ -5256,7 +5256,9 @@ index 52c8550..c6d4c8f 100644
              'mysql_dsn' => getenv('MYSQL_DSN'),
              'mysql_user' => getenv('MYSQL_USER'),
              'mysql_password' => getenv('MYSQL_PASSWORD'),
-@@ -40,6 +43,12 @@ trait GetConfigTrait
++            'cloudsql_connection_name' => getenv('CLOUDSQL_CONNECTION_NAME'),
+             'mongo_url' => getenv('MONGO_URL'),
+             'mongo_database' => getenv('MONGO_DATABASE'),
              'mongo_collection' => getenv('MONGO_COLLECTION'),
          );
  

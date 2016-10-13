@@ -1012,10 +1012,10 @@ index dd8d5d8..d7fc4df 100644
 +    }
  }
 diff --git a/test/lib/GetConfigTrait.php b/test/lib/GetConfigTrait.php
-index c6d4c8f..7d5d2f0 100644
+index 0ada004..a37ebf6 100644
 --- a/test/lib/GetConfigTrait.php
 +++ b/test/lib/GetConfigTrait.php
-@@ -41,6 +41,8 @@ trait GetConfigTrait
+@@ -42,6 +42,8 @@ trait GetConfigTrait
              'mongo_url' => getenv('MONGO_URL'),
              'mongo_database' => getenv('MONGO_DATABASE'),
              'mongo_collection' => getenv('MONGO_COLLECTION'),
